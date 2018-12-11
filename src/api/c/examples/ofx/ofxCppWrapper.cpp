@@ -10,32 +10,58 @@
 #include "ofxCpp.h"
 
 extern "C" {
-
 ofxC *ofx_new() {
     ofApp *a = new ofApp();
     return (ofxC *)a;
 }
 
-void ofx_setup(){
-    
+void ofx_setup(const ofxC *cOfApp){
+  ofApp *a = (ofxC *)cOfApp;
+  a->setup();
 }
-void ofx_update()
-void ofx_draw()
+void ofx_update(const ofxC *cOfApp){
+    ofApp *a = (ofxC *)cOfApp;
+    a->update();
+}
+void ofx_draw(const ofxC *cOfApp){
+    ofApp *a = (ofxC *)cOfApp;
+    a->draw();
+}
 
-void ofx_keyPressed(int key)
-void ofx_keyReleased(int key)
-void ofx_mouseMoved(int x, int y )
-void ofx_mouseDragged(int x, int y, int button)
-void ofx_mousePressed(int x, int y, int button)
-void ofx_mouseReleased(int x, int y, int button)
-void ofx_mouseEntered(int x, int y)
-void ofx_mouseExited(int x, int y)
-void ofx_windowResized(int w, int h)
-
-
-
-
-
-
-
+void ofx_keyPressed(const ofxC *cOfApp, int key){
+    ofApp *a = (ofxC *)cOfApp;
+    a->keyPressed(key);
+}
+void ofx_keyReleased(const ofxC *cOfApp, int key){
+    ofApp *a = (ofxC *)cOfApp;
+    a->keyReleased(key);
+}
+void ofx_mouseMoved(const ofxC *cOfApp, int x, int y ){
+    ofApp *a = (ofxC *)cOfApp;
+    a->mouseMoved(x, y);
+}
+void ofx_mouseDragged(const ofxC *cOfApp, int x, int y, int button){
+    ofApp *a = (ofxC *)cOfApp;
+    a->mouseDragged(x, y, button);
+}
+void ofx_mousePressed(const ofxC *cOfApp, int x, int y, int button){
+    ofApp *a = (ofxC *)cOfApp;
+    a->mousePressed(x, y, button);
+}
+void ofx_mouseReleased(const ofxC *cOfApp, int x, int y, int button){
+    ofApp *a = (ofxC *)cOfApp;
+    a->mouseReleased(x, y, button);
+}
+void ofx_mouseEntered(const ofxC *cOfApp, int x, int y){
+    ofApp *a = (ofxC *)cOfApp;
+    a->mouseEntered(x, y);
+}
+void ofx_mouseExited(const ofxC *cOfApp, int x, int y){
+    ofApp *a = (ofxC *)cOfApp;
+    a->mouseExited(x, y);
+}
+void ofx_windowResized(const ofxC *cOfApp, int w, int h){
+    ofApp *a = (ofxC *)cOfApp;
+    a->windowResized(w, h);
+}
 }
