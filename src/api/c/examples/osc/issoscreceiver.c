@@ -34,6 +34,7 @@ int main(int argc, char *argv[])
     fd_set readSet;
     FD_ZERO(&readSet);
     FD_SET(fd, &readSet);
+
     struct timeval timeout = {1, 0}; // select times out after 1 second
     if (select(fd+1, &readSet, NULL, NULL, &timeout) > 0) {
       struct sockaddr sa; // can be safely cast to sockaddr_in
@@ -41,6 +42,7 @@ int main(int argc, char *argv[])
       int len = 0;
       while ((len = (int) recvfrom(fd, buffer, sizeof(buffer), 0, &sa, &sa_len)) > 0) {
         if (tosc_isBundle(buffer)) {
+	  printf("OOF\n");
           tosc_bundle bundle;
           tosc_parseBundle(&bundle, buffer, len);
           const uint64_t timetag = tosc_getTimetag(&bundle);
@@ -49,11 +51,13 @@ int main(int argc, char *argv[])
             tosc_printMessage(&osc);
           }
         } else {
+	  printf("NOOF\n");
           tosc_message osc;
           tosc_parseMessage(&osc, buffer, len);
           tosc_printMessage(&osc);
         }
       }
+
     }
   }
 

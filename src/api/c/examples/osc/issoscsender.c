@@ -24,9 +24,9 @@ int main(int argc, char *argv[])
   char buffer[2048]; // declare a 2Kb buffer to read packet data into
   printf("Starting write tests:\n");
   int len = 0;
-
+  const int fd = socket(AF_INET, SOCK_DGRAM, 0);
 /* Currently, send a hard coded message to the reciever */
-  len = tosc_writeMessage(buffer, sizeof(buffer), "/player 1", "/left-hand",
+  len = tosc_writeMessage(buffer, sizeof(buffer), "9000", "f",
       1.0f, 2.0f, 3.0f); 
   tosc_printOscBuffer(buffer, len);
   printf("done.\n");
@@ -36,8 +36,9 @@ int main(int argc, char *argv[])
   */
 
   while (keepRunning) {
- printf("Sending message\n");
+    printf("Sending message\n");
     tosc_printOscBuffer(buffer, len);
+    send(fd+1, buffer, len, 0);
   }
 
   return 0; 

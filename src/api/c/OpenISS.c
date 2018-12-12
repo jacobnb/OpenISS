@@ -16,7 +16,7 @@ int main(int argc, char** argv)
     
     /* From pipeline */
     iss_init();
-    //iss_draw();
+    iss_draw();
     iss_free();
     
     return 0;
