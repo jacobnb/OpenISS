@@ -55,6 +55,7 @@ printf("Press Ctrl+C to stops.\n");
     fd_set readSet;
     FD_ZERO(&readSet);
     FD_SET(fd, &readSet);
+
     struct timeval timeout = {1, 0}; // select times out after 1 second
     if (select(fd+1, &readSet, NULL, NULL, &timeout) > 0) {
       struct sockaddr sa; // can be safely cast to sockaddr_in
@@ -64,7 +65,7 @@ printf("Press Ctrl+C to stops.\n");
 
 
         if (tosc_isBundle(buffer)) {
-	 printf("ifbundle \n");
+	        printf("OOF\n");
           tosc_bundle bundle;
           tosc_parseBundle(&bundle, buffer, len);
           const uint64_t timetag = tosc_getTimetag(&bundle);
@@ -73,12 +74,13 @@ printf("Press Ctrl+C to stops.\n");
             tosc_printMessage(&osc);
           }
         } else {
-	 printf("notbundle \n");
+	  printf("NOOF\n");
           tosc_message osc;
           tosc_parseMessage(&osc, buffer, len);
           tosc_printMessage(&osc);
         }
       }
+
     }
 }
 
